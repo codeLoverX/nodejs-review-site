@@ -22,12 +22,12 @@ const Comment = require('./model/Comment')
 
 // set up database and routes
 connectDB()
+
+reviewController(app, Review);
+commentController(app, Comment)
 app.get('/resetData', async (req, res) => {
   res.json({ reviews: await resetData() });
 })
-reviewController(app, Review);
-commentController(app, Comment)
-
 // start app
 const port = process.env.PORT || 3000
 app.listen(port, () => {
