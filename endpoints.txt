@@ -1,0 +1,10 @@
+/*
+URL	HTTP Verb	Action	What it Does
+/reviews	GET	index	See all reviews
+/reviews/new	GET	new	See new review form
+/reviews	POST	create	Create a new review
+/reviews/:id	GET	show	See one review
+/reviews/:id/edit	GET	edit	See an edit review form
+/reviews/:id	PATCH/PUT	update	Update a review
+*/
+

@@ -1,0 +1,50 @@
+<!-- views/reviews-show.handlebars -->
+<a href="/" class="my-5">Back to Home</a>
+
+
+<div class="card mt-3">
+    {{!-- <img class="card-img-top" src="{{this.imgUrl}}" alt="Card image cap"> --}}
+    <div class="card-body">
+
+        <h5 class="card-title">{{review.title}}</h5>
+        <p class="card-text">{{review.movieTitle}}</p>
+        <p class="card-text">{{review.description}}</p>
+        <div class="text-left">
+            <form method="POST" action="/reviews/{{review._id}}?_method=DELETE">
+                <button class="btn btn-primary" type="submit">Delete</button>
+            </form>
+        </div>
+
+        <hr>
+
+        <!-- Show Comments -->
+        {{#each comments}}
+        <div class="card px-3 py-3">
+            <div class="card-block">
+                <div class="card-title">
+                    <h5 class="d-inline"> {{this.title}} </h5>
+                    <form class="text-left d-inline px-0 mx-0" method="POST"
+                        action="/reviews/comments/{{this._id}}?_method=DELETE">
+                        <small>
+                            <button class="badge border-danger text-danger bg-white"
+                                type="submit">Delete</button>
+                        </small>
+                    </form>
+                </div>
+                <p class="card-text">{{this.content}}
+
+                </p>
+                <!-- Delete link -->
+
+            </div>
+        </div>
+        {{/each}}
+        <hr />
+        <!-- Comment form -->
+        {{!-- Remember the > in {{> comment}} signifies that comment.handlebars is a partial! --}}
+        {{> comment-form}}
+
+        <hr>
+
+    </div>
+</div>

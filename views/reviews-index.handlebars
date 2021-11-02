@@ -1,6 +1,16 @@
-<!-- reviews-index -->
-<h1>Reviews</h1>
+<!-- views/reviews-index.handlebars -->
+
+<h1>Movie Review Sites</h1>
+
 {{#each reviews}}
-  <h2>{{this.title}}</h2>
-  <small>{{this.movieTitle}}</small>
+<div class="card mt-3">
+  {{!-- <img class="card-img-top" src="{{this.imgUrl}}" alt="Card image cap"> --}}
+  <div class="card-body">
+    <h5 class="card-title">{{this.title}}</h5>
+    <p class="card-text">{{this.movieTitle}}</p>
+    <div class="text-right">
+      <a href="/reviews/{{this._id}}" class="btn btn-primary">View</a>
+    </div>
+  </div>
+</div>
 {{/each}}

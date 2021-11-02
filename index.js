@@ -1,27 +1,35 @@
+// import modules
 const express = require('express')
-const app = express()
+const methodOverride = require('method-override');
 var exphbs = require('express-handlebars');
 
+
+// configure app
+const app = express()
+app.use(express.urlencoded({ extended: true }));
 app.engine('handlebars', exphbs({ defaultLayout: 'main' }));
+app.use(methodOverride('_method'))
 app.set('view engine', 'handlebars');
 
 
-let reviews = [
-    { title: "Great Review", movieTitle: "Batman II" },
-    { title: "Awesome Movie", movieTitle: "Titanic" }
-  ]
-  
-  // INDEX
-  app.get('/reviews', (req, res) => {
-    res.render('reviews-index', { reviews: reviews });
-  })
+// import customModules
+const { connectDB } = require('./db');
+const { resetData } = require('./seeder');
+const reviewController = require('./controllers/review')
+const commentController = require('./controllers/comment')
+const Review = require('./model/Review')
+const Comment = require('./model/Comment')
 
-  
+// set up database and routes
+connectDB()
+app.get('/resetData', async (req, res) => {
+  res.json({ reviews: await resetData() });
+})
+reviewController(app, Review);
+commentController(app, Comment)
 
-app.get('/', (req, res) => {
-    res.render('home', { msg: 'Handlebars are Cool!' });
-  })
-
+// start app
 app.listen(3000, () => {
   console.log('App listening on port 3000!')
 })
+
