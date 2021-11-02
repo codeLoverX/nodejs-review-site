@@ -29,7 +29,8 @@ reviewController(app, Review);
 commentController(app, Comment)
 
 // start app
-app.listen(3000, () => {
+const port = procees.env.PORT || 3000
+app.listen(port, () => {
   console.log('App listening on port 3000!')
 })
 
